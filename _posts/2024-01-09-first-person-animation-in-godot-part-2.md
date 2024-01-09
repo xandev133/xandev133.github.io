@@ -1,6 +1,6 @@
 ## First Person Animation in Godot - Part 2
 
-This is the second blog post
+In the second part of these series we are going to setup our Godot project to display the viewmodel assets we exported in part 1.
 
 ---
 
@@ -35,6 +35,8 @@ Assign the texture image to the `Albedo` of the material.
 
 You are now done with setting up your assets, and are able to continue to setup the viewmodel in the scene!
 
+---
+
 ### Setting up the viewmodel
 
 First, split your viewport in to two screens. This will be needed later to position the gun properly and match it with the first person view.
@@ -49,11 +51,58 @@ Your hierarchy should now look similar to the following example, except for the 
 
 ![Scene_10](/img/godot/godot_scene_10.png)
 
-Under the `Skeletal3D` node, add two `BoneAttachment3D` nodes and assign one to the camera bone, and one to the right hand bone. These attachments act as the sockets that will inherit the position and rotation of the parent bone.
+Under the `Skeletal3D` node, add two `BoneAttachment3D` nodes and assign one to the camera bone, and one to the right hand bone. These attachments act as the sockets that will inherit the position and rotation of the parent bone. Name them `Camera_Socket` and `Gun_Socket`.
 
 ![Scene_11](/img/godot/godot_scene_11.png)
 
-WORK IN PROGRES...
+Add a Camera3D node under the `Camera_Socket` bone, and set `Near` to a small value. You can also tweak the FOV here. For this example I am using a FOV of `60`.
+
+![Scene_12](/img/godot/godot_scene_12.png)
+
+Finally, add the `.glb` file of the gun under the `Gun_Socket` node, and make it local as well. The hierarchy should now look like this:
+
+![Scene_13](/img/godot/godot_scene_13.png)
+
+You can assign the material to both the arms and gun meshes directly on the mesh instance nodes.
+
+![Scene_14](/img/godot/godot_scene_14.png)
+
+Your scene should now look like this. At the moment, the gun is not alligned correctly. Move the gun in the correct position by moving it manually.
+
+![Scene_15](/img/godot/godot_scene_15.png)
+![Scene_16](/img/godot/godot_scene_16.png)
+
+Finally, set both the reload animations on the arms and gun to "play on load" and "loop". Make sure to add the viewmodel scene to the main scene and press play to see the results.
+
+![Scene_17](/img/godot/godot_scene_17.png)
+![Scene_18](/img/godot/godot_scene_18.png)
+
+---
+
+### Crosshair
+
+For the dot crosshair I have used the following code to draw it on screen using a `CenterContainer` node:
+
+```csharp
+public partial class Crosshair : CenterContainer
+{
+	[Export] private float _dotRadius = 3.0f;
+	[Export] private Color _dotColor = Color.Color8(255, 255, 255, 255);
+	[Export] private float _dotOutlineRadius = 4.2f;
+	[Export] private Color _dotOutlineColor = Color.Color8(0, 0, 0, 255);
+
+	public override void _Ready()
+	{
+		QueueRedraw();
+	}
+
+    public override void _Draw()
+    {
+		DrawCircle(new Vector2(0.0f, 0.0f), _dotOutlineRadius, _dotOutlineColor);
+        DrawCircle(new Vector2(0.0f, 0.0f), _dotRadius, _dotColor);
+    }
+}
+```
 
 ### Next steps
 
