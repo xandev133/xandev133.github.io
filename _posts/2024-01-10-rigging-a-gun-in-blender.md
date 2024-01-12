@@ -9,7 +9,7 @@ In this blog post I will guide you through the process of rigging a weapon in Bl
 ### Prerequisites
 
 - Blender 4.0.2
-- Pistol model from David Stenfors tutorial series
+- STG44 model from TastyTony
 
 ### Goals
 
