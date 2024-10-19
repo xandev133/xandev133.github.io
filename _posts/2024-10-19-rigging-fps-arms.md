@@ -68,7 +68,7 @@ Duplicate the following bones:
 - hand (rename to hand_Ctrl_IK_L, parent to root)
 - lower fingers (rename to fingername_Ctrl_L, parent all to hand)
 
-Finally, we also need to add a pole target bone behind the elbow. This is the target that allows the arm to 'rotate'. See the image for an example. Make sure that in the bone properties the 'deform' checkbox is unticked / set to false.
+Finally, we also need to add a pole target bone behind the elbow. This is the target that allows the arm to 'rotate'. See the image for an example. Make sure that in the bone properties the 'deform' checkbox is unticked / set to false. If you need to decouple the bones because you have used extrude, use `ALT + P` to clear the parent.
 
 ![controllerbones](/img/rigging_fps_arms/5_adding_controller_bones.png)
 
@@ -87,17 +87,64 @@ In pose mode, select each bone and in the bone properties tab go to viewport dis
 
 ![controllerbones](/img/rigging_fps_arms/6_assigning_bone_shapes.png)
 
+To be sure, apply the transforms again for the rig with `CTRL + A` -> Apply transforms.
+
 ---
 
 ### Adding constraints
 
-In this part of the guide we will add constraints to the bones so they can actually move.
+In this part of the guide we will add constraints to the bones so they can actually move. Note that you can only add bone constraints in pose mode. They should be added to the deformation bones.
+
+- Adding the IK-solver constraint
+
+Add the inverse kinematics constraint to the lower arm bone. Set the target to the rig, and select the `hand_Ctrl_IK_L` bone. Finally we assign the pole target by also selecting the arm rig as the pole target and the `pole_target_L` as the bone.
+The chain length should be set to 2. The pole angle is usually -180 or 180 but set it to a value so the arms are pointing towards the pole target.
+
+![constraints](/img/rigging_fps_arms/7_ik_constraint.png)
+
+- Adding copy location
+
+The only bone that uses the copy location constraint is the upper arm bone. It follows the location of the control bone.
+
+![constraints](/img/rigging_fps_arms/8_copy_location_upper_arm.png)
+
+- Adding copy rotation
+
+The copy rotation constraint is used over the rest of the bones, but there are some differences. For the hand we only want to copy the rotation of the controller bone. Also make sure to set the checkbox `inherit rotation` to false in the relations tab. This is needed so it doesn't rotate when the parent rotates.
+
+![constraints](/img/rigging_fps_arms/9_copy_rotation_hand.png)
+
+The lower part of the finger has the same constraint has the hand bones with the same settings:
+
+![constraints](/img/rigging_fps_arms/10_copy_rotation_finger_1.png)
+
+For all the other parts of the bones we use a copy rotation constraint, but limit the axis to `X`, and set the mix to `Add`. Additionally, we set the target and owner to `Local Space`.
+
+![constraints](/img/rigging_fps_arms/10_copy_rotation_finger_2_and_3.png)
 
 ---
 
 ### Adding a FPS camera
 
 In this part of the guide we will add a camera so we can animate it individually. The camera will not be exported, but it allows us to see our animations from the first person perspective.
+
+Select the rig and go into edit mode. Press `SHIFT + A` to add a new bone at the 3D cursor's location. Move it behind the root bone like so:
+
+![camera](/img/rigging_fps_arms/11_add_camera_bone.png)
+
+The camera bone is parented to the root bone, and has no controller bone. It `is` a deform bone, because we want to export the movement of the camera with the rest of the rig after the animation stage. Beacuse of this you can add the bone to the deform bones group and give it a unique color. Next go back into object mode and add the camera. Align it so it faces forward towards the thumb. Set it to `field of view` and set the FOV value to `90`.
+
+Now, to make the camera part of the rig, set its relation to the arm rig:
+
+![camera](/img/rigging_fps_arms/12_camera_properties.png)
+
+Finally, to make the camera move with the camera bone, add a child of object constraint:
+
+![camera](/img/rigging_fps_arms/13_camera_obj_constraints.png)
+
+To avoid moving the rig accidently. Lock the unused transforms of the controller bones. For example, the upper arm controller bone wont be scaled, so you apply the lock on that:
+
+![camera](/img/rigging_fps_arms/14_lock_transform.png)
 
 ---
 
