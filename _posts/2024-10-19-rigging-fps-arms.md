@@ -16,7 +16,7 @@
 
 ---
 
-### Preparing the gun model
+### Preparing the arms model
 
 Make sure that the 3D cursor is centered to the world's origin by using `SHIFT + S` -> Cursor to world origin. In this example, I am rigging one arm to keep things simple, and to avoid over-information. Everything applies to the other side, which you can easily mirror by using symmetry.
 
@@ -97,7 +97,7 @@ In this part of the guide we will add constraints to the bones so they can actua
 
 ### Adding a FPS camera
 
-TODO
+In this part of the guide we will add a camera so we can animate it individually. The camera will not be exported, but it allows us to see our animations from the first person perspective.
 
 ---
 
