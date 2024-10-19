@@ -151,3 +151,23 @@ To avoid moving the rig accidently. Lock the unused transforms of the controller
 ### Skinning
 
 In this part of the guide we skin the arm mesh to the rig. This is the process where we assign parts of the mesh to a vertex group. A vertex group is then moved by moving the bone.
+
+Because our arms model is low-poly, and we aren't aiming for anything realistic, we will manually assign parts of the mesh that will move with a certain bone. Go into object mode and select your arm mesh, then select your arm rig. Press `CTRL + P` and select with empty groups.
+
+![skinning](/img/rigging_fps_arms/15_vertex_groups.png)
+
+This has created various of vertex groups based on the bones of the rig. Since we only want to move the mesh, we can remove any vertex groups that are related to the camera or control bones.
+
+![skinning](/img/rigging_fps_arms/15_vertex_groups_2.png)
+
+Select the arms mesh, and go into edit mode. Use the `L` button to in `face select mode` to select parts of the mesh, and assign them to the correct vertex group by clicking the `assign` button.
+
+![skinning](/img/rigging_fps_arms/15_vertex_groups_3.png)
+
+After you assigned all parts of the mesh to its corresponding vertex group, you should be able to go back into pose mode, select a controller bone, and the mesh should follow:
+
+![skinning](/img/rigging_fps_arms/16_pose.png)
+
+If there are any problems, check if all vertex groups have the correct parts of the mesh assigned. You can do this by pressing the vertex group, and then press the select button. This will highlight the part that is assigned.
+
+Congratulations on rigging your FPS arm. If you have also followed the gun rigging guide, you should be ready to combine both the rigs to create first person animations!
