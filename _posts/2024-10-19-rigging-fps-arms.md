@@ -34,6 +34,8 @@ While being in edit mode, select the root bone and duplicate it with `SHIFT + D`
 
 ![armbones](/img/rigging_fps_arms/2_armature_adding_arm_bones.png)
 
+**Tip: Pull the elbow slightly back, so there is a 'bend' in the arm. This will help the IK-solver later when adding constraints**
+
 Make sure that the upper arm bone's parent is the root bone. You can confirm this in the bone tab under 'relations'. Visually there will also be a dotted line towards the root bone. The lower arm bone has to be a child of the upper arm bone, and the hand a child of the lower arm bone.
 
 In order to make the rigging process easier, it is generally a good idea to enable certain viewport settings. You can do this by selecting the armature in edit mode. Go to object data properties (green running stick-figure icon), and tick all boxes under viewport display.
@@ -52,11 +54,15 @@ Side:
 
 ![armature](/img/rigging_fps_arms/4_full_armature_2.png)
 
+Make sure to apply all transforms to the rig in object mode to avoid further issues.
+
 ---
 
 ### Adding controller bones
 
-TODO
+In this part of the guide we're going to add controller bones. Controller bones will not deform the object, and act as a visual aid to move the actual deform bones that we added in the previous part. The controller bones will have their own bone shape, to make it clear which parts of the rig can be moved.
+
+
 
 ---
 
