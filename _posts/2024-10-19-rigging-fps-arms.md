@@ -52,7 +52,7 @@ Top-view:
 
 Side:
 
-![armature](/img/rigging_fps_arms/4_full_armature_2.png)
+![armature_2](/img/rigging_fps_arms/4_full_armature_2.png)
 
 Make sure to apply all transforms to the rig in object mode to avoid further issues.
 
@@ -62,13 +62,36 @@ Make sure to apply all transforms to the rig in object mode to avoid further iss
 
 In this part of the guide we're going to add controller bones. Controller bones will not deform the object, and act as a visual aid to move the actual deform bones that we added in the previous part. The controller bones will have their own bone shape, to make it clear which parts of the rig can be moved.
 
+Duplicate the following bones:
 
+- upper arm (rename to upper_Ctrl_L, parent to root)
+- hand (rename to hand_Ctrl_IK_L, parent to root)
+- lower fingers (rename to fingername_Ctrl_L, parent all to hand)
+
+Finally, we also need to add a pole target bone behind the elbow. This is the target that allows the arm to 'rotate'. See the image for an example. Make sure that in the bone properties the 'deform' checkbox is unticked / set to false.
+
+![controllerbones](/img/rigging_fps_arms/5_adding_controller_bones.png)
+
+**Tip: Select the controller bones, and go to viewport display. Set bone color to red / blue depending if it is the right or left arm.**
+
+Next, select all your controller bones and assign them to a new bone collection. Note that if you are planning to rig two arms, you want two controller bone collections (for left and right).
+
+![controllerbones](/img/rigging_fps_arms/5_adding_to_bone_collection.png)
+
+Finally, we want to create bone shapes so the rig will look a bit cleaner. Add a new cube and UV-sphere and move them next to your rig.
+Add them to a collection, and apply the transforms for both meshes.
+
+![controllerbones](/img/rigging_fps_arms/5_bone_shapes.png)
+
+In pose mode, select each bone and in the bone properties tab go to viewport display. Use the picker tool to select one of your meshes. Edit it so it surrounds the part of the arm that is controlled.
+
+![controllerbones](/img/rigging_fps_arms/6_assigning_bone_shapes.png)
 
 ---
 
 ### Adding constraints
 
-TODO
+In this part of the guide we will add constraints to the bones so they can actually move.
 
 ---
 
@@ -80,4 +103,4 @@ TODO
 
 ### Skinning
 
-TODO
+In this part of the guide we skin the arm mesh to the rig. This is the process where we assign parts of the mesh to a vertex group. A vertex group is then moved by moving the bone.
