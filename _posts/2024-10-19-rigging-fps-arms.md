@@ -170,4 +170,6 @@ After you assigned all parts of the mesh to its corresponding vertex group, you 
 
 If there are any problems, check if all vertex groups have the correct parts of the mesh assigned. You can do this by pressing the vertex group, and then press the select button. This will highlight the part that is assigned.
 
+If for some reason some parts dont rotate as expected, look at which setting the transform pivot point is set. In my case, it is Local and Median point.
+
 Congratulations on rigging your FPS arm. If you have also followed the gun rigging guide, you should be ready to combine both the rigs to create first person animations!
