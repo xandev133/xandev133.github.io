@@ -1,5 +1,7 @@
 ## Animation Basics
 
+![result](/img/animation/pose_result.png)
+
 ---
 
 ### Prerequisites
